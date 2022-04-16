@@ -1,15 +1,13 @@
 package com.example.savemoviesforlater.data.local
 
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.example.savemoviesforlater.model.Movie
 import kotlinx.coroutines.flow.Flow
 
+@Dao
 interface MoviesDao {
     @Query("SELECT * FROM movie order by popularity DESC")
-    fun getAll(): Flow<List<Movie>?>
+    fun getAll(): List<Movie>?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(movies: List<Movie>)
